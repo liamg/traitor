@@ -1,2 +1,3 @@
-# clamber
-Linux privesc fun
+# Traitor
+
+A Linux privilege escalation framework.

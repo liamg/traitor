@@ -44,4 +44,4 @@ If the machine you're attempting privesc on cannot reach GitHub to download the 
 ## TODO
 
 - [ ] Add a whole bunch of methods
-- [ ] Switch out `/bin/bash` for `traitor shell` as a setuid shell wrapper
+- [x] Switch out `/bin/bash` for `traitor shell` as a setuid shell wrapper

@@ -21,7 +21,7 @@ traitor -a
 Run with the `-e` flag to attempt to exploit a specific vulnerability and gain a root shell.
 
 ```bash
-traitor -e docker:writeable-socket
+traitor -e docker:writable-socket
 ```
 
 ## Getting Traitor
@@ -36,7 +36,7 @@ If the machine you're attempting privesc on cannot reach GitHub to download the 
 
 ## Included Methods
 
-- [x] Writeable docker.sock
+- [x] Writable `docker.sock` (no internet connection or local images required!)
 - [ ] Basic sudo
 - [ ] GTFOBins via weak sudo rules
 - [ ] Kernel exploits
@@ -44,4 +44,4 @@ If the machine you're attempting privesc on cannot reach GitHub to download the 
 ## TODO
 
 - [ ] Add a whole bunch of methods
-- [ ] Switch out `/bin/bash` for `traitor shell` as a setuid shell wrapper
+- [x] Switch out `/bin/bash` for `traitor shell` as a setuid shell wrapper

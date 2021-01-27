@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/liamg/traitor/internal/logger"
+	"github.com/liamg/traitor/pkg/logger"
 	"github.com/liamg/traitor/pkg/state"
 
 	"github.com/liamg/traitor/pkg/exploits"

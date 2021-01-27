@@ -37,6 +37,7 @@ If the machine you're attempting privesc on cannot reach GitHub to download the 
 ## Included Methods
 
 - [x] Writable `docker.sock` (no internet connection or local images required!)
+- [ ] sudo:CVE-2021-3156
 - [ ] Basic sudo
 - [ ] GTFOBins via weak sudo rules
 - [ ] Kernel exploits

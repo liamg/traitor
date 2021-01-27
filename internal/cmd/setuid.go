@@ -61,6 +61,8 @@ var setuidCmd = &cobra.Command{
 			shellCmd.Args = append(shellCmd.Args, "-c", setuidShellCmd)
 		} else {
 			time.Sleep(time.Second)
+			fmt.Println("")
+			defer func() { fmt.Println("") }()
 		}
 
 		if err := shellCmd.Run(); err != nil {

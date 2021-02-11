@@ -1,8 +1,8 @@
 # Traitor
 
-A Linux privilege escalation framework.
+Local Unix privilege escalation made simple.
 
-Packages up a bunch of methods to exploit local vulnerabilities and misconfigurations in order to gain a root shell.
+Packages up a bunch of methods to exploit local vulnerabilities and misconfigurations (including all of GTFOBins) in order to gain a root shell.
 
 ## Usage
 
@@ -12,13 +12,13 @@ Run with no arguments to find potential vulnerabilities/misconfigurations which 
 traitor
 ```
 
-Run with the `-a` flag to find potential vulnerabilities, attempting to exploit each, stopping if a root shell is gained.
+Run with the `-a`/`--any` flag to find potential vulnerabilities, attempting to exploit each, stopping if a root shell is gained.
 
 ```bash
 traitor -a
 ```
 
-Run with the `-e` flag to attempt to exploit a specific vulnerability and gain a root shell.
+Run with the `-e`/`--exploit` flag to attempt to exploit a specific vulnerability and gain a root shell.
 
 ```bash
 traitor -e docker:writable-socket
@@ -26,7 +26,7 @@ traitor -e docker:writable-socket
 
 ## Getting Traitor
 
-Grab a binary from the downloads page, or use go:
+Grab a binary from the [releases page](https://github.com/liamg/traitor/releases), or use go:
 
 ```
 go get -u github.com/liamg/traitor/cmd/traitor

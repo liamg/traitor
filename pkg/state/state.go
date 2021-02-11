@@ -1,6 +1,11 @@
 package state
 
+import "os"
+
 type State struct {
+	HasPassword bool
+	SudoEntries Sudoers
+	Hostname    string
 }
 
 func New() *State {
@@ -8,6 +13,11 @@ func New() *State {
 }
 
 func (s *State) Assess() {
+
+	s.Hostname, _ = os.Hostname()
+
+	s.processSudoers(s.Hostname)
+
 	// check existing backdoors
 	// list users
 	// list current user + groups

@@ -28,8 +28,8 @@ jobs:
       - name: Upload result
         uses: actions/upload-artifact@v2-preview
         with:
-          name: traitor-${{ matrix.os }}
-          path: traitor-${{ matrix.os }}
+          name: traitor-${{ matrix.arch }}
+          path: traitor-${{ matrix.arch }}
 
   release:
     needs: [build]

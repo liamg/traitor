@@ -35,6 +35,9 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     steps:
+      - name: Get tag name
+        id: get_tag_name
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -43,10 +46,10 @@ jobs:
         with:
           # name the release with the run_id to allow multiple builds on the same branch/tag
           # https://github.com/actions/create-release/issues/2#issuecomment-613591846
-          tag_name: ${{ github.ref }}-${{github.run_id }}
-          release_name: Release ${{ github.sha }}
-          draft: true
-          prerelease: true
+          tag_name: ${{ steps.get_tag_name.outputs.VERSION }}
+          release_name: Release ${{ steps.get_tag_name.outputs.VERSION }}
+          draft: false
+          prerelease: false
 
       - uses: actions/download-artifact@v1
         with:

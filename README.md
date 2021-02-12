@@ -2,7 +2,7 @@
 
 Linux privilege escalation made easy.
 
-Packages up a bunch of methods to exploit local misconfigurations/vulns (including all of GTFOBins) in order to gain a root shell.
+Packages up a bunch of methods to exploit local misconfigurations/vulns (including all of [GTFOBins](https://gtfobins.github.io/)) in order to gain a root shell.
 
 ![Demo](demo.gif)
 

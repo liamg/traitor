@@ -16,9 +16,11 @@ import (
 
 var runAnyExploit bool
 var exploitName string
+var promptForPassword bool
 
 func init() {
-	rootCmd.PersistentFlags().BoolVarP(&runAnyExploit, "exploit-any", "a", runAnyExploit, "Attempt to exploit a vulnerability as soon as it is detected. Provides a shell where possible.")
+	rootCmd.PersistentFlags().BoolVarP(&runAnyExploit, "any", "a", runAnyExploit, "Attempt to exploit a vulnerability as soon as it is detected. Provides a shell where possible.")
+	rootCmd.PersistentFlags().BoolVarP(&promptForPassword, "with-password", "p", promptForPassword, "Prompt for the user password, if you know it. Can provide more GTFOBins possibilities via sudo.")
 	rootCmd.PersistentFlags().StringVarP(&exploitName, "exploit", "e", exploitName, "Run the specified exploit, if the system is found to be vulnerable. Provides a shell where possible.")
 }
 
@@ -50,16 +52,19 @@ var rootCmd = &cobra.Command{
 
 		baseLog.Printf("Assessing machine state...")
 		localState := state.New()
+		localState.HasPassword = promptForPassword
 		localState.Assess()
 
 		baseLog.Printf("Checking for opportunities...")
 		allExploits := exploits.Get(exploits.SpeedAny)
 		var found bool
+		var vulnFound bool
 		for _, exploit := range allExploits {
 			if exploitName == "" || exploitName == exploit.Name {
 				found = true
 				exploitLogger := baseLog.WithTitle(exploit.Name)
 				if exploit.Vulnerability.IsVulnerable(ctx, localState, exploitLogger) {
+					vulnFound = true
 					if disclosure, ok := exploit.Vulnerability.(exploits.Disclosure); ok {
 						exploitLogger.Printf("Gathering information...")
 						if err := disclosure.Disclose(ctx, localState, exploitLogger); err != nil {
@@ -87,8 +92,10 @@ var rootCmd = &cobra.Command{
 				}
 			}
 		}
-		if !found {
+		if exploitName != "" && !found {
 			baseLog.Printf("No exploit found for '%s'", exploitName)
+		}else if !vulnFound  {
+			baseLog.Printf("Nothing found to exploit.")
 		}
 	},
 }

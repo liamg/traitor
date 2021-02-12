@@ -1,52 +1,97 @@
+name: Test and Release
+
 on:
   push:
     # Sequence of patterns matched against refs/tags
     tags:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
-name: Create Release
 
 jobs:
+
   build:
-    name: Create Release
     strategy:
       matrix:
-        go-version: [ 1.15.x ]
-        os: [ ubuntu-latest ]
         arch: [ amd64, arm64, 386  ]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - name: Install Go
         uses: actions/setup-go@v2
         with:
-          go-version: ${{ matrix.go-version }}
+          go-version: 1.15.x
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Test
-        run: go test ./... -race -cover
+        run: make test
       - name: Build
-        run: CGO_ENABLED=0 GOARCH=${{ matrix.arch }} go build -ldflags "-X github.com/liamg/traitor/version.Version=`echo '${{ github.ref }}' | awk -F'/' '{print $3}'`" ./cmd/traitor -o traitor-${{ matrix.arch }}
-      - name: Create changelog
-        run: |
-          echo ::set-env name=CHANGELOG::$(- export CHANGELOG=$(git log $(git describe --abbrev=0 --tags "${TRAVIS_TAG}^")..$TRAVIS_TAG --pretty=format:'<li> <a href="http://github.com/liamg/aminal/commit/%H">view commit &bull;</a> %s</li> ' --reverse | while read line; do echo -n "$line "; done)
+        run: CGO_ENABLED=0 GOARCH=${{ matrix.arch }} go build -ldflags "-X github.com/liamg/traitor/version.Version=`echo '${{ github.ref }}' | awk -F'/' '{print $3}'`" -o traitor-${{ matrix.arch }} ./cmd/traitor
+      - name: Upload result
+        uses: actions/upload-artifact@v2-preview
+        with:
+          name: traitor-${{ matrix.arch }}
+          path: traitor-${{ matrix.arch }}
+
+  release:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get tag name
+        id: get_tag_name
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: ${{ env.CHANGELOG }}
+          # name the release with the run_id to allow multiple builds on the same branch/tag
+          # https://github.com/actions/create-release/issues/2#issuecomment-613591846
+          tag_name: ${{ steps.get_tag_name.outputs.VERSION }}
+          release_name: Release ${{ steps.get_tag_name.outputs.VERSION }}
           draft: false
           prerelease: false
+
+      - uses: actions/download-artifact@v1
+        with:
+          name: traitor-amd64
+        continue-on-error: true
       - name: Upload Release Asset
-        id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ./traitor-${{ matrix.arch }}
-          asset_name: traitor-${{ matrix.arch }}
-          asset_content_type: application/octet-stream
+          asset_path: ./traitor-amd64/traitor-amd64
+          asset_name: traitor-amd64
+          asset_content_type: application/octen-stream
+        continue-on-error: true
+
+      - uses: actions/download-artifact@v1
+        with:
+          name: traitor-arm64
+        continue-on-error: true
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./traitor-arm64/traitor-arm64
+          asset_name: traitor-arm64
+          asset_content_type: application/octen-stream
+        continue-on-error: true
+
+      - uses: actions/download-artifact@v1
+        with:
+          name: traitor-386
+        continue-on-error: true
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./traitor-386/traitor-386
+          asset_name: traitor-386
+          asset_content_type: application/octen-stream
+        continue-on-error: true

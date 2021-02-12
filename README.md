@@ -4,6 +4,8 @@ Linux privilege escalation made easy.
 
 Packages up a bunch of methods to exploit local misconfigurations/vulns (including all of GTFOBins) in order to gain a root shell.
 
+![Demo](demo.gif)
+
 ## Usage
 
 Run with no arguments to find potential vulnerabilities/misconfigurations which could allow privilege escalation.

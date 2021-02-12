@@ -8,7 +8,11 @@ import (
 )
 
 func(s *State) processSudoers(hostname string) {
-	cmd := exec.Command("sudo", "-l")
+	args := []string{"-l"}
+	if !s.HasPassword {
+		args = append(args, "-n")
+	}
+	cmd := exec.Command("sudo", args...)
 	data, err := cmd.Output()
 	if err != nil {
 		return
@@ -49,8 +53,8 @@ type Sudoers []*SudoEntry
 
 func(s Sudoers) GetEntryForBinary(binary string, hasPasswd bool) (*SudoEntry, error){
 	for _, entry := range s {
-		if (entry.BinaryName == binary || entry.AllCommands) || entry.HostnameMatches {
-			if (entry.UserName == "root" || entry.AllUsers) && (hasPasswd || !entry.NoPasswd) {
+		if (entry.BinaryName == binary || entry.AllCommands) && entry.HostnameMatches {
+			if (entry.UserName == "root" || entry.AllUsers) && (hasPasswd || entry.NoPasswd) {
 				return entry, nil
 			}
 		}

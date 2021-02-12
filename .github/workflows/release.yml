@@ -7,8 +7,35 @@ on:
 name: Create Release
 
 jobs:
-  build:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go-version }}
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Test
+        run: go test ./... -race -cover
+  release:
     name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+  build:
+    name: Build Binaries
     strategy:
       matrix:
         go-version: [ 1.15.x ]
@@ -22,21 +49,8 @@ jobs:
           go-version: ${{ matrix.go-version }}
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Test
-        run: go test ./... -race -cover
       - name: Build
         run: CGO_ENABLED=0 GOARCH=${{ matrix.arch }} go build -ldflags "-X github.com/liamg/traitor/version.Version=`echo '${{ github.ref }}' | awk -F'/' '{print $3}'`" -o traitor-${{ matrix.arch }} ./cmd/traitor
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
       - name: Upload Release Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1

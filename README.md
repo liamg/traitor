@@ -1,8 +1,8 @@
 # Traitor
 
-Local Unix privilege escalation made simple.
+Linux privilege escalation made easy.
 
-Packages up a bunch of methods to exploit local vulnerabilities and misconfigurations (including all of GTFOBins) in order to gain a root shell.
+Packages up a bunch of methods to exploit local misconfigurations/vulns (including all of GTFOBins) in order to gain a root shell.
 
 ## Usage
 
@@ -41,8 +41,3 @@ If the machine you're attempting privesc on cannot reach GitHub to download the 
 - [ ] Basic sudo
 - [ ] GTFOBins via weak sudo rules
 - [ ] Kernel exploits
-
-## TODO
-
-- [ ] Add a whole bunch of methods
-- [x] Switch out `/bin/bash` for `traitor shell` as a setuid shell wrapper

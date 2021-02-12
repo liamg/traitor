@@ -26,13 +26,14 @@ jobs:
         run: go test ./... -race -cover
       - name: Build
         run: CGO_ENABLED=0 GOARCH=${{ matrix.arch }} go build -ldflags "-X github.com/liamg/traitor/version.Version=`${{ github.ref }}`" ./cmd/traitor -o traitor-${{ matrix.arch }}
+      - name: Create changelog
+        run: |
+          echo ::set-env name=CHANGELOG::$(- export CHANGELOG=$(git log $(git describe --abbrev=0 --tags "${TRAVIS_TAG}^")..$TRAVIS_TAG --pretty=format:'<li> <a href="http://github.com/liamg/aminal/commit/%H">view commit &bull;</a> %s</li> ' --reverse | while read line; do echo -n "$line "; done)
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        run: |
-          echo ::set-env name=CHANGELOG::$(- export CHANGELOG=$(git log $(git describe --abbrev=0 --tags "${TRAVIS_TAG}^")..$TRAVIS_TAG --pretty=format:'<li> <a href="http://github.com/liamg/aminal/commit/%H">view commit &bull;</a> %s</li> ' --reverse | while read line; do echo -n "$line "; done)
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}

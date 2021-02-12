@@ -31,7 +31,7 @@ traitor -e docker:writable-socket
 Grab a binary from the [releases page](https://github.com/liamg/traitor/releases), or use go:
 
 ```
-go get -u github.com/liamg/traitor/cmd/traitor
+CGO_ENABLED=0 go get -u github.com/liamg/traitor/cmd/traitor
 ```
 
 If the machine you're attempting privesc on cannot reach GitHub to download the binary, and you have no way to upload the binary to the machine over SCP/FTP etc., then you can try base64 encoding the binary on your machine, and echoing the base64 encoded string to `| base64 -d > /tmp/traitor` on the target machine, remembering to `chmod +x` it once it arrives.

@@ -10,7 +10,7 @@ Run with no arguments to find potential vulnerabilities/misconfigurations which 
 
 ```bash
 traitor
-```
+``` 
 
 Run with the `-a`/`--any` flag to find potential vulnerabilities, attempting to exploit each, stopping if a root shell is gained.
 

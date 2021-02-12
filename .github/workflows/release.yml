@@ -26,9 +26,6 @@ jobs:
         run: go test ./... -race -cover
       - name: Build
         run: CGO_ENABLED=0 GOARCH=${{ matrix.arch }} go build -ldflags "-X github.com/liamg/traitor/version.Version=`echo '${{ github.ref }}' | awk -F'/' '{print $3}'`" -o traitor-${{ matrix.arch }} ./cmd/traitor
-      - name: Create changelog
-        run: |
-          echo ::set-env name=CHANGELOG::$(git log $(git describe --abbrev=0 --tags "${{ github.ref }}^")..${{ github.ref }} --pretty=format:'<li> <a href="http://github.com/liamg/traitor/commit/%H">view commit &bull;</a> %s</li> ' --reverse | while read line; do echo -n "$line "; done)
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -37,7 +34,7 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body: ${{ env.CHANGELOG }}
+          body: Release ${{ github.ref }}
           draft: false
           prerelease: false
       - name: Upload Release Asset

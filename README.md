@@ -8,22 +8,22 @@ Packages up a bunch of methods to exploit local misconfigurations/vulns (includi
 
 ## Usage
 
-Run with no arguments to find potential vulnerabilities/misconfigurations which could allow privilege escalation.
+Run with no arguments to find potential vulnerabilities/misconfigurations which could allow privilege escalation. Add the `-p` flag if the current user password is known.
 
 ```bash
-traitor
+traitor -p
 ```
 
-Run with the `-a`/`--any` flag to find potential vulnerabilities, attempting to exploit each, stopping if a root shell is gained.
+Run with the `-a`/`--any` flag to find potential vulnerabilities, attempting to exploit each, stopping if a root shell is gained. Again, add the `-p` flag if the current user password is known.
 
 ```bash
-traitor -a
+traitor -a -p
 ```
 
 Run with the `-e`/`--exploit` flag to attempt to exploit a specific vulnerability and gain a root shell.
 
 ```bash
-traitor -e docker:writable-socket
+traitor -p -e docker:writable-socket
 ```
 
 ## Getting Traitor

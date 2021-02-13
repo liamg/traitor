@@ -73,13 +73,14 @@ var rootCmd = &cobra.Command{
 					}
 					if sheller, ok := exploit.Vulnerability.(exploits.ShellDropper); ok {
 						if runAnyExploit || exploitName == exploit.Name {
-							exploitLogger.Printf("System is vulnerable, starting exploit...")
+							exploitLogger.Printf("Opportunity found, trying to exploit it...")
 							if err := sheller.Shell(ctx, localState, exploitLogger); err != nil {
 								baseLog.WithTitle("error").Printf("Exploit failed: %s", err)
 								baseLog.Printf("Continuing to look for opportunities")
+								vulnFound = false
 								continue
 							}
-							exploitLogger.Printf("Exploit successful.")
+							exploitLogger.Printf("Session complete.")
 							baseLog.Printf("Done.")
 							return
 						}

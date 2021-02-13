@@ -2,7 +2,7 @@
 
 Linux privilege escalation made easy.
 
-Packages up a bunch of methods to exploit local misconfigurations/vulns (including all of [GTFOBins](https://gtfobins.github.io/)) in order to gain a root shell.
+Packages up a bunch of methods to exploit local misconfigurations/vulns (including most of [GTFOBins](https://gtfobins.github.io/)) in order to gain a root shell.
 
 ![Demo](demo.gif)
 
@@ -35,11 +35,3 @@ CGO_ENABLED=0 go get -u github.com/liamg/traitor/cmd/traitor
 ```
 
 If the machine you're attempting privesc on cannot reach GitHub to download the binary, and you have no way to upload the binary to the machine over SCP/FTP etc., then you can try base64 encoding the binary on your machine, and echoing the base64 encoded string to `| base64 -d > /tmp/traitor` on the target machine, remembering to `chmod +x` it once it arrives.
-
-## Included Methods
-
-- [x] Writable `docker.sock` (no internet connection or local images required!)
-- [ ] sudo:CVE-2021-3156
-- [ ] Basic sudo
-- [ ] GTFOBins via weak sudo rules
-- [ ] Kernel exploits

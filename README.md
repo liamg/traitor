@@ -1,14 +1,16 @@
 # Traitor
 
-Linux privilege escalation made easy.
+Automatically exploit low-hanging fruit to pop a root shell. Linux privilege escalation made easy!
 
-Packages up a bunch of methods to exploit local misconfigurations/vulns (including most of [GTFOBins](https://gtfobins.github.io/)) in order to gain a root shell.
+Traitor packages up a bunch of methods to exploit local misconfigurations and vulnerabilities (including most of [GTFOBins](https://gtfobins.github.io/)) in order to pop a root shell.
 
 ![Demo](demo.gif)
 
+It'll exploit most sudo privileges listed in GTFOBins to inadvertently pop a shell, as well as exploiting issues like a writable `docker.sock`. More routes to root will be added over time too.
+
 ## Usage
 
-Run with no arguments to find potential vulnerabilities/misconfigurations which could allow privilege escalation. Add the `-p` flag if the current user password is known.
+Run with no arguments to find potential vulnerabilities/misconfigurations which could allow privilege escalation. Add the `-p` flag if the current user password is known. The password will be requested if it's needed to analyse sudo permissions etc.
 
 ```bash
 traitor -p

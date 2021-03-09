@@ -2,17 +2,19 @@ package state
 
 import (
 	"fmt"
+	"os"
 	"os/exec"
 	"path"
 	"strings"
 )
 
-func(s *State) processSudoers(hostname string) {
+func (s *State) processSudoers(hostname string) {
 	args := []string{"-l"}
 	if !s.HasPassword {
 		args = append(args, "-n")
 	}
 	cmd := exec.Command("sudo", args...)
+	cmd.Env = append(os.Environ(), "LANG=C", "LC_MESSAGES=C")
 	data, err := cmd.Output()
 	if err != nil {
 		return
@@ -38,20 +40,20 @@ func(s *State) processSudoers(hostname string) {
 }
 
 type SudoEntry struct {
-	AllUsers bool
-	UserName string
-	AllHosts bool
-	Hostname string
-	AllCommands bool
-	Command string
-	NoPasswd bool
-	BinaryName string
+	AllUsers        bool
+	UserName        string
+	AllHosts        bool
+	Hostname        string
+	AllCommands     bool
+	Command         string
+	NoPasswd        bool
+	BinaryName      string
 	HostnameMatches bool
 }
 
 type Sudoers []*SudoEntry
 
-func(s Sudoers) GetEntryForBinary(binary string, hasPasswd bool) (*SudoEntry, error){
+func (s Sudoers) GetEntryForBinary(binary string, hasPasswd bool) (*SudoEntry, error) {
 	for _, entry := range s {
 		if (entry.BinaryName == binary || entry.AllCommands) && entry.HostnameMatches {
 			if (entry.UserName == "root" || entry.AllUsers) && (hasPasswd || entry.NoPasswd) {
@@ -92,7 +94,7 @@ func parseSudoLine(line string, hostname string) (*SudoEntry, error) {
 	specification := parts[1]
 	parts = strings.Split(specification, ":")
 
-	for i := 0 ; i < len(parts)-1; i++ {
+	for i := 0; i < len(parts)-1; i++ {
 		switch strings.TrimSpace(parts[i]) {
 		case "NOPASSWD":
 			entry.NoPasswd = true

@@ -28,6 +28,10 @@ Run with the `-e`/`--exploit` flag to attempt to exploit a specific vulnerabilit
 traitor -p -e docker:writable-socket
 ```
 
+## Supported Platforms
+
+Traitor will run on all Unix-like systems, though certain exploits will only function on certain systems.
+
 ## Getting Traitor
 
 Grab a binary from the [releases page](https://github.com/liamg/traitor/releases), or use go:

@@ -20,10 +20,10 @@ func (logger Logger) WithTitle(title string) Logger {
 }
 
 func (logger Logger) Printf(format string, args ...interface{}) {
-	_ = tml.Printf("<blue>[</blue><yellow>+</yellow><blue>]</blue>")
+	_ = tml.Printf("\r<blue>[</blue><yellow>+</yellow><blue>]</blue>")
 	if logger.title != "" {
 		_ = tml.Printf("<blue>[</blue><red>%s</red><blue>]</blue>", logger.title)
 	}
 	line := fmt.Sprintf(format, args...)
-	_ = tml.Printf(" %s\n", line)
+	_ = tml.Printf(" %s\r\n", line)
 }

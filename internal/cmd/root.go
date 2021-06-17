@@ -35,17 +35,9 @@ var rootCmd = &cobra.Command{
 	PreRun: func(_ *cobra.Command, args []string) {
 		fmt.Printf("\x1b[34m"+`
 
- 888                    d8b 888                    
- 888                    Y8P 888                    
- 888                        888                    
- 888888 888d888 8888b.  888 888888 .d88b.  888d888 
- 888    888P"      "88b 888 888   d88""88b 888P"   
- 888    888    .d888888 888 888   888  888 888     
- Y88b.  888    888  888 888 Y88b. Y88..88P 888     
-  "Y888 888    "Y888888 888  "Y888 "Y88P"  888     
-`+"\x1b[31m"+`    %s | https://github.com/liamg/traitor 
- 
-`, version.Version)
+▀█▀ █▀█ ▄▀█ █ ▀█▀ █▀█ █▀█
+░█░ █▀▄ █▀█ █ ░█░ █▄█ █▀▄ %s
+`+"\x1b[31mhttps://github.com/liamg/traitor\n\n", version.Version)
 	},
 	Run: func(cmd *cobra.Command, args []string) {
 

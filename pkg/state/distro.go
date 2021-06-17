@@ -36,3 +36,12 @@ func (s *State) processDistro() {
 		}
 	}
 }
+
+func (s *State) IsDebianLike() bool {
+	switch s.DistroID {
+	case Debian, Ubuntu, Kali, Parrot:
+		return true
+	}
+
+	return false
+}

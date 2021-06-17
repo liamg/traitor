@@ -3,8 +3,10 @@ package cmd
 import (
 	"context"
 	"fmt"
-	"github.com/liamg/traitor/internal/version"
 	"os"
+	"os/user"
+
+	"github.com/liamg/traitor/internal/version"
 
 	"github.com/liamg/traitor/pkg/logger"
 	"github.com/liamg/traitor/pkg/state"
@@ -30,8 +32,8 @@ var rootCmd = &cobra.Command{
 	Long: `An extensible privilege escalation framework for Linux
                 Complete documentation is available at https://github.com/liamg/traitor`,
 	Args: cobra.ExactArgs(0),
-	PreRun: func(_ *cobra.Command, args[] string){
-	fmt.Printf("\x1b[34m" + `
+	PreRun: func(_ *cobra.Command, args []string) {
+		fmt.Printf("\x1b[34m"+`
 
  888                    d8b 888                    
  888                    Y8P 888                    
@@ -41,7 +43,7 @@ var rootCmd = &cobra.Command{
  888    888    .d888888 888 888   888  888 888     
  Y88b.  888    888  888 888 Y88b. Y88..88P 888     
   "Y888 888    "Y888888 888  "Y888 "Y88P"  888     
-`+"\x1b[31m"+ `    %s | https://github.com/liamg/traitor 
+`+"\x1b[31m"+`    %s | https://github.com/liamg/traitor 
  
 `, version.Version)
 	},
@@ -49,6 +51,11 @@ var rootCmd = &cobra.Command{
 
 		ctx := context.Background()
 		baseLog := logger.New()
+
+		if user, err := user.Current(); err == nil && user.Uid == "0" {
+			baseLog.Printf("You are already root.")
+			return
+		}
 
 		baseLog.Printf("Assessing machine state...")
 		localState := state.New()
@@ -95,7 +102,7 @@ var rootCmd = &cobra.Command{
 		}
 		if exploitName != "" && !found {
 			baseLog.Printf("No exploit found for '%s'", exploitName)
-		}else if !vulnFound  {
+		} else if !vulnFound {
 			baseLog.Printf("Nothing found to exploit.")
 		}
 	},

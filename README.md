@@ -4,7 +4,7 @@ Automatically exploit low-hanging fruit to pop a root shell. Linux privilege esc
 
 Traitor packages up a bunch of methods to exploit local misconfigurations and vulnerabilities (including most of [GTFOBins](https://gtfobins.github.io/)) in order to pop a root shell.
 
-![Demo](demo.gif)
+![Demo](polkit.png)
 
 It'll exploit most sudo privileges listed in GTFOBins to pop a root shell, as well as exploiting issues like a writable `docker.sock`. More routes to root will be added over time too.
 

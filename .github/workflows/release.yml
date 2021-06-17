@@ -24,7 +24,7 @@ jobs:
       - name: Test
         run: make test
       - name: Build
-        run: CGO_ENABLED=0 GOARCH=${{ matrix.arch }} go build -ldflags "-X github.com/liamg/traitor/version.Version=`echo '${{ github.ref }}' | awk -F'/' '{print $3}'`" -o traitor-${{ matrix.arch }} ./cmd/traitor
+        run: CGO_ENABLED=0 GOARCH=${{ matrix.arch }} go build -ldflags "-X github.com/liamg/traitor/internal/version.Version=`echo '${{ github.ref }}' | awk -F'/' '{print $3}'`" -o traitor-${{ matrix.arch }} ./cmd/traitor
       - name: Upload result
         uses: actions/upload-artifact@v2-preview
         with:

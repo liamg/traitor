@@ -19,11 +19,13 @@ import (
 var runAnyExploit bool
 var exploitName string
 var promptForPassword bool
+var skipExploits []string
 
 func init() {
 	rootCmd.PersistentFlags().BoolVarP(&runAnyExploit, "any", "a", runAnyExploit, "Attempt to exploit a vulnerability as soon as it is detected. Provides a shell where possible.")
 	rootCmd.PersistentFlags().BoolVarP(&promptForPassword, "with-password", "p", promptForPassword, "Prompt for the user password, if you know it. Can provide more GTFOBins possibilities via sudo.")
 	rootCmd.PersistentFlags().StringVarP(&exploitName, "exploit", "e", exploitName, "Run the specified exploit, if the system is found to be vulnerable. Provides a shell where possible.")
+	rootCmd.PersistentFlags().StringSliceVarP(&skipExploits, "skip", "s", skipExploits, "Exploit(s) to skip - specify multiple times to skip multiple exploits.")
 }
 
 var rootCmd = &cobra.Command{
@@ -59,6 +61,9 @@ var rootCmd = &cobra.Command{
 		var found bool
 		var vulnFound bool
 		for _, exploit := range allExploits {
+			if shouldSkip(exploit.Name) {
+				continue
+			}
 			if exploitName == "" || exploitName == exploit.Name {
 				found = true
 				exploitLogger := baseLog.WithTitle(exploit.Name)
@@ -98,6 +103,15 @@ var rootCmd = &cobra.Command{
 			baseLog.Printf("Nothing found to exploit.")
 		}
 	},
+}
+
+func shouldSkip(id string) bool {
+	for _, skip := range skipExploits {
+		if skip == id {
+			return true
+		}
+	}
+	return false
 }
 
 func Execute() {

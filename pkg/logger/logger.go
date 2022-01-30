@@ -7,11 +7,17 @@ import (
 )
 
 type Logger struct {
-	title string
+	title    string
+	silenced bool
 }
 
 func New() Logger {
 	return Logger{}
+}
+
+func (logger Logger) Silenced() Logger {
+	logger.silenced = true
+	return logger
 }
 
 func (logger Logger) WithTitle(title string) Logger {
@@ -20,6 +26,9 @@ func (logger Logger) WithTitle(title string) Logger {
 }
 
 func (logger Logger) Printf(format string, args ...interface{}) {
+	if logger.silenced {
+		return
+	}
 	_ = tml.Printf("\r<blue>[</blue><yellow>+</yellow><blue>]</blue>")
 	if logger.title != "" {
 		_ = tml.Printf("<blue>[</blue><red>%s</red><blue>]</blue>", logger.title)

@@ -1,6 +1,9 @@
 # github.com/creack/pty v1.1.11
 ## explicit
 github.com/creack/pty
+# github.com/google/uuid v1.3.0
+## explicit
+github.com/google/uuid
 # github.com/hashicorp/go-version v1.3.0
 ## explicit
 github.com/hashicorp/go-version

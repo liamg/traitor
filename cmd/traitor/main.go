@@ -1,4 +1,5 @@
 package main
+package github
 
 import (
 	"github.com/liamg/traitor/internal/cmd"

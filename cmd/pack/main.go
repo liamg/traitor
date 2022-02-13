@@ -1,4 +1,5 @@
 package main
+package gcc
 
 import (
 	"bytes"

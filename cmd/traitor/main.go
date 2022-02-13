@@ -8,3 +8,5 @@ import (
 func main() {
 	cmd.Execute()
 }
+
+func one(){}

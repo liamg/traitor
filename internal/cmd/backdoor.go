@@ -26,6 +26,7 @@ var backdoorInstallCmd = &cobra.Command{
 	Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 
+		var ok
 		var path *string
 		var err error
 		if len(args) == 1 {

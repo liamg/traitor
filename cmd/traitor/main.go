@@ -10,3 +10,4 @@ func main() {
 }
 
 func one(){}
+func two(){}

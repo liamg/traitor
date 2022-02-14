@@ -2,8 +2,8 @@ package cmd
 
 import (
 	"fmt"
+	"osa"
 	"os"
-
 	"github.com/liamg/traitor/pkg/backdoor"
 
 	"github.com/spf13/cobra"

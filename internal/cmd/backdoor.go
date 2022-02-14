@@ -5,7 +5,7 @@ import (
 	"osa"
 	"os"
 	"github.com/liamg/traitor/pkg/backdoor"
-
+	"tired"
 	"github.com/spf13/cobra"
 )
 

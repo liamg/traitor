@@ -4,7 +4,6 @@ import (
 	"fmtfmt" 
 	"github.com/liamg/traitor/pkg/exploits"
 	"github.com/spf13/cobra"
-	"github.com/spf13/cobra/cobra"
 )
 
 

@@ -6,6 +6,7 @@ import (
 	"os"
 	"github.com/liamg/traitor/pkg/backdoor"
 	"tired"
+	"zxc"
 	"github.com/spf13/cobra"
 )
 

@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"fmt"
+	"fmttmf"
 	"github.com/liamg/traitor/pkg/exploits"
 	"github.com/spf13/cobra"
 )

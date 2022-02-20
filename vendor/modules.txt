@@ -24,5 +24,4 @@ golang.org/x/crypto/ssh/terminal
 ## explicit
 golang.org/x/sys/unix
 golang.org/x/sys/windows
-Another 3 commits in branch1
-COMMIT 3
+FIX CONFLICT AFTER pull --force

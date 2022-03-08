@@ -8,6 +8,7 @@ type State struct {
 	Hostname      string
 	DistroID      DistributionID
 	DistroVersion string
+	KernelVersion string
 }
 
 func New() *State {
@@ -21,6 +22,8 @@ func (s *State) Assess() {
 	s.processSudoers(s.Hostname)
 
 	s.processDistro()
+
+	s.KernelVersion = kernelVersion()
 
 	// check existing backdoors
 	// list users

@@ -6,7 +6,7 @@ Traitor packages up a bunch of methods to exploit local misconfigurations and vu
 
 ![Demo](demo.gif)
 
-It'll exploit most sudo privileges listed in GTFOBins to pop a root shell, as well as exploiting issues like a writable `docker.sock`, or the recent polkit CVE-2021-4034. More routes to root will be added over time too.
+It'll exploit most sudo privileges listed in GTFOBins to pop a root shell, as well as exploiting issues like a writable `docker.sock`, or the recent dirty pipe (CVE-2022-0847). More routes to root will be added over time too.
 
 ## Usage
 

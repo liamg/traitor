@@ -2,7 +2,7 @@
 
 .PHONY: build
 build:
-	CGO_ENABLED=0 go build ./cmd/traitor1
+	CGO_ENABLED=0 go build ./cmd/traitor
 
 .PHONY: pack
 pack:

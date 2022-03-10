@@ -42,7 +42,7 @@ Traitor будет работать на всех Unix-подобных сист
 ## Getting Traitor
 
 Grab a binary from the [releases page](https://github.com/liamg/traitor/releases), or use go:
-
+Возьмите двоичный файл со [страницы релизов] (https://github.com/liamg/traitor/releases) или используйте go: 
 ```
 CGO_ENABLED=0 go get -u github.com/liamg/traitor/cmd/traitor
 ```

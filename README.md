@@ -37,6 +37,7 @@ traitor -p -e docker:writable-socket
 ## Supported Platforms
 
 Traitor will run on all Unix-like systems, though certain exploits will only function on certain systems.
+Traitor будет работать на всех Unix-подобных системах, хотя некоторые эксплойты будут работать только на определенных системах. 
 
 ## Getting Traitor
 

@@ -1,6 +1,7 @@
 # Traitor
 
 # Clone2 branch1 - 1 commit
+# Clone2 branch1 - 2 commit
 
 Automatically exploit low-hanging fruit to pop a root shell. Linux privilege escalation made easy!
 

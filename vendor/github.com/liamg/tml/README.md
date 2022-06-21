@@ -91,6 +91,7 @@ It's not required to close tags you've opened, though it can make for easier rea
 
 - `<bold>`
 - `<dim>`
+- `<italic>`
 - `<underline>`
 - `<blink>`
 - `<reverse>`

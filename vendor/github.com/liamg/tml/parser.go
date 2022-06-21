@@ -23,12 +23,13 @@ type parserState struct {
 type attrs uint8
 
 const (
-	bold      uint8 = 1
-	dim             = 2
-	underline       = 4
-	blink           = 8
-	reverse         = 16
-	hidden          = 32
+	bold uint8 = 1 << iota
+	dim
+	underline
+	blink
+	reverse
+	hidden
+	italic
 )
 
 var resetAll = "\x1b[0m"
@@ -38,6 +39,7 @@ var resetBg = "\x1b[49m"
 var attrMap = map[uint8]string{
 	bold:      "\x1b[1m",
 	dim:       "\x1b[2m",
+	italic:    "\x1b[3m",
 	underline: "\x1b[4m",
 	blink:     "\x1b[5m",
 	reverse:   "\x1b[7m",
@@ -160,7 +162,7 @@ func (p *Parser) Parse(reader io.Reader) error {
 			}
 			return err
 		}
-		for _, r := range []rune(string(buffer[:n])) {
+		for _, r := range string(buffer[:n]) {
 
 			if inTag {
 				if r == '>' {

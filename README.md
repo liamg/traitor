@@ -1,6 +1,6 @@
 # Traitor
 
-I know what it is!
+I know what it is! Really!
 
 Automatically exploit low-hanging fruit to pop a root shell. Linux privilege escalation made easy!
 

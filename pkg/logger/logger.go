@@ -13,7 +13,7 @@ type Logger struct {
 
 func New() Logger {
 	return Logger{}
-}
+}SDAFDSF
 
 func (logger Logger) Silenced() Logger {
 	logger.silenced = true

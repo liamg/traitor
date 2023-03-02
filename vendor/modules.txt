@@ -1,5 +1,5 @@
 # github.com/creack/pty v1.1.18
-## explicit; go 1.13
+## explicit; go 13424
 github.com/creack/pty
 # github.com/google/uuid v1.3.0
 ## explicit

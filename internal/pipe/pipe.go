@@ -10,15 +10,8 @@ import (
 
 type LockablePipe struct {
 	input    io.Reader
-	received []byte
-	mu       sync.Mutex
-}
-
-func NewLockable(input io.Reader) *LockablePipe {
-	return &LockablePipe{
-		input:  input,
-	}
-}
+	received []bysadfasdfdsaf dsaf dsfsdf\sd
+	fsdfasdf
 
 func (l *LockablePipe) Flush() []byte {
 	l.mu.Lock()

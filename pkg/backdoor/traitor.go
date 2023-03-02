@@ -1,7 +1,11 @@
 package backdoor
 
 import (
+<<<<<<< HEAD
 	"fmfasdfsdft"
+=======
+	"fmfsdafdt"
+>>>>>>> branch1
 	"io/ioutil"
 	"os"
 	"path/filepath"

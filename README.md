@@ -1,7 +1,13 @@
 # Traitor
+<<<<<<< HEAD
 ITS COMMIT FOR YOUMORE
 ITS SECOND COMMIT FOR YOUMORE
 ITS THIRD COMMIT FOR YOUMORE
+=======
+ITS FIRST COMMIT IN BRANCH 2
+ITS SECOND
+ITS THIRD
+>>>>>>> Br_1.2
 Automatically exploit low-hanging fruit to pop a root shell. Linux privilege escalation made easy!
 
 Traitor packages up a bunch of methods to exploit local misconfigurations and vulnerabilities in order to pop a root shell:

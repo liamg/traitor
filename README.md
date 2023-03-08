@@ -15,7 +15,7 @@ Traitor packages up a bunch of methods to exploit local misconfigurations and vu
 It'll exploit most sudo privileges listed in GTFOBins to pop a root shell, as well as exploiting issues like a writable `docker.sock`, or the recent dirty pipe (CVE-2022-0847). More routes to root will be added over time too.
 
 ## Usage
-## smthchange
+## nowthat
 
 Run with no arguments to find potential vulnerabilities/misconfigurations which could allow privilege escalation. Add the `-p` flag if the current user password is known. The password will be requested if it's needed to analyse sudo permissions etc.
 

@@ -7,3 +7,4 @@ import (
 func main() {
 	cmd.Execute()
 }
+123hello!

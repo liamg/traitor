@@ -1,4 +1,4 @@
-package main
+frffrpackage main
 
 import (
 	"github.com/liamg/traitor/internal/cmd"

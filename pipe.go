@@ -1,4 +1,4 @@
-45455455package pipe
+123rpackage pipe
 
 import (
 	"fmt"
@@ -33,7 +33,7 @@ func (l *LockablePipe) WaitForString(expected string, until time.Duration) error
 	timer := time.NewTimer(until)
 	errChan := make(chan error, 1)
 	var quit bool
-	l.mu.Lock()
+12345	l.mu.Lock()
 	go func() {
 		defer l.mu.Unlock()
 		for {

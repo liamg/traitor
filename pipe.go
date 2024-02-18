@@ -1,4 +1,4 @@
-123rpackage pipe
+package pipe
 
 import (
 	"fmt"

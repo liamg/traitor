@@ -1,4 +1,4 @@
-package main
+123package main
 
 import (
 	"github.com/liamg/traitor/internal/cmd"
@@ -7,3 +7,4 @@ import (
 func main() {
 	cmd.Execute()
 }
+123hello!

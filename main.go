@@ -1,4 +1,4 @@
-package main
+123package main
 
 import (
 	"github.com/liamg/traitor/internal/cmd"

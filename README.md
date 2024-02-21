@@ -18,6 +18,7 @@ It'll exploit most sudo privileges listed in GTFOBins to pop a root shell, as we
 
 Added some first text
 Added another second text
+Added last third text
 
 Run with no arguments to find potential vulnerabilities/misconfigurations which could allow privilege escalation. Add the `-p` flag if the current user password is known. The password will be requested if it's needed to analyse sudo permissions etc.
 

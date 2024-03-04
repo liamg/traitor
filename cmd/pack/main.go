@@ -9,8 +9,7 @@ import (
 	"path/filepath"
 )
 
-//change1 branch1
-//change1 branch2
+//1
 
 const outputDir = "./pkg/exploits/cve20214034"
 

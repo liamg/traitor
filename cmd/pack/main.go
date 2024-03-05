@@ -9,6 +9,10 @@ import (
 	"path/filepath"
 )
 
+//1
+//2
+//3
+
 const outputDir = "./pkg/exploits/cve20214034"
 
 func main() {
